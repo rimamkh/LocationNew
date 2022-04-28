@@ -27,7 +27,6 @@ import java.util.Locale;
 public class Current_Location extends AppCompatActivity {
     private TextView AddressText;
     private Button LocationButton;
-    private LocationRequest locationRequest;
     FusedLocationProviderClient fusedLocationProviderClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

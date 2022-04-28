@@ -19,6 +19,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,14 +29,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     Button currentLocation;
     SearchView search;
-    Fragment map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         currentLocation=findViewById(R.id.check);
-
         search=findViewById(R.id.search);
+
         //search for country or place
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -82,10 +84,23 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(19.169257, 73.341601);
+        LatLng sydney =  new LatLng(-34, 151);;
         mMap.addMarker(new MarkerOptions()
                 .position(sydney)
                 .title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sydney1 = new LatLng(-30, 140);
+        mMap.addMarker(new MarkerOptions()
+                .position(sydney1)
+                .title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney1));
+        PolylineOptions polylineOptions = new PolylineOptions()
+                .add(new LatLng(-34, 151))
+                .add(new LatLng(-30, 140));  /// Closes the polyline.
+
+// Get back the mutable Polyline
+        Polyline polyline = mMap.addPolyline(polylineOptions);
+
     }
+
 }
